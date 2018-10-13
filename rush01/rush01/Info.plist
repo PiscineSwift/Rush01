@@ -41,5 +41,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your permission to spy on you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your permission to spy on you</string>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+    <string>googlechromes</string>
+    <string>comgooglemaps</string>
+    </array>
 </dict>
 </plist>
