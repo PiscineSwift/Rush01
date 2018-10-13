@@ -10,16 +10,65 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Delegate-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="rush01" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="MKMapView">
+                    <view key="view" contentMode="scaleToFill" id="9NB-Eu-vDY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-3T-aFh" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vng-Lj-aEd"/>
+                                </connections>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rsr-cS-UXc">
+                                <rect key="frame" x="10" y="547" width="355" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjx-dT-hnT">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
+                                        <state key="normal" title="Start Location"/>
+                                        <connections>
+                                            <action selector="openStartLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pOE-ej-MdM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2W-Gg-Ni4">
+                                        <rect key="frame" x="0.0" y="40" width="355" height="30"/>
+                                        <state key="normal" title="Destination"/>
+                                        <connections>
+                                            <action selector="openDestinationLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wxv-gi-3yX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWd-dP-FaA">
+                                        <rect key="frame" x="0.0" y="80" width="355" height="30"/>
+                                        <state key="normal" title="Get direcation"/>
+                                        <connections>
+                                            <action selector="showDirection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7RM-dJ-7vE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Rsr-cS-UXc" firstAttribute="leading" secondItem="FcI-PG-JWo" secondAttribute="leading" constant="10" id="3oo-41-VeD"/>
+                            <constraint firstItem="FcI-PG-JWo" firstAttribute="bottom" secondItem="Rsr-cS-UXc" secondAttribute="bottom" constant="10" id="IzJ-7b-EWM"/>
+                            <constraint firstItem="FcI-PG-JWo" firstAttribute="trailing" secondItem="Rsr-cS-UXc" secondAttribute="trailing" constant="10" id="c2L-d6-zo9"/>
+                            <constraint firstItem="TvZ-3T-aFh" firstAttribute="top" secondItem="9NB-Eu-vDY" secondAttribute="top" id="i9m-kv-ANY"/>
+                            <constraint firstAttribute="trailing" secondItem="TvZ-3T-aFh" secondAttribute="trailing" id="j76-0r-v3d"/>
+                            <constraint firstItem="TvZ-3T-aFh" firstAttribute="leading" secondItem="9NB-Eu-vDY" secondAttribute="leading" id="vdJ-oQ-mKa"/>
+                            <constraint firstAttribute="bottom" secondItem="TvZ-3T-aFh" secondAttribute="bottom" id="xaa-OA-GdT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FcI-PG-JWo"/>
                     </view>
+                    <connections>
+                        <outlet property="destinationLocation" destination="g2W-Gg-Ni4" id="0An-tW-aXZ"/>
+                        <outlet property="googleMaps" destination="TvZ-3T-aFh" id="ggl-Gn-Hxs"/>
+                        <outlet property="startLocation" destination="sjx-dT-hnT" id="5Q7-fl-k26"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
