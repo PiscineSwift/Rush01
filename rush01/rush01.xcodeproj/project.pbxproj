@@ -12,6 +12,7 @@
 		1DAF2F752171FA1C00FB2AD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F732171FA1C00FB2AD6 /* Main.storyboard */; };
 		1DAF2F772171FA1C00FB2AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F762171FA1C00FB2AD6 /* Assets.xcassets */; };
 		1DAF2F7A2171FA1C00FB2AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F782171FA1C00FB2AD6 /* LaunchScreen.storyboard */; };
+		BE9FB2AD5602D4FD4099BCF3 /* Pods_rush01.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFC78B6A78E4F7A88BCB9B9 /* Pods_rush01.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		1DAF2F762171FA1C00FB2AD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DAF2F792171FA1C00FB2AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DAF2F7B2171FA1C00FB2AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EFC78B6A78E4F7A88BCB9B9 /* Pods_rush01.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rush01.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		337349064AA913994CEF3F52 /* Pods-rush01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rush01.release.xcconfig"; path = "Pods/Target Support Files/Pods-rush01/Pods-rush01.release.xcconfig"; sourceTree = "<group>"; };
+		A68BF348B824BE4DF4B98C31 /* Pods-rush01.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rush01.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rush01/Pods-rush01.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE9FB2AD5602D4FD4099BCF3 /* Pods_rush01.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				1DAF2F6E2171FA1C00FB2AD6 /* rush01 */,
 				1DAF2F6D2171FA1C00FB2AD6 /* Products */,
+				9DFF0065501BE4DE2AFEA63C /* Pods */,
+				57C912726E2D1012DFE39E8D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = rush01;
 			sourceTree = "<group>";
 		};
+		57C912726E2D1012DFE39E8D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EFC78B6A78E4F7A88BCB9B9 /* Pods_rush01.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DFF0065501BE4DE2AFEA63C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A68BF348B824BE4DF4B98C31 /* Pods-rush01.debug.xcconfig */,
+				337349064AA913994CEF3F52 /* Pods-rush01.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DAF2F7E2171FA1C00FB2AD6 /* Build configuration list for PBXNativeTarget "rush01" */;
 			buildPhases = (
+				A14B2BA5D873B95DF4C5D2EE /* [CP] Check Pods Manifest.lock */,
 				1DAF2F682171FA1C00FB2AD6 /* Sources */,
 				1DAF2F692171FA1C00FB2AD6 /* Frameworks */,
 				1DAF2F6A2171FA1C00FB2AD6 /* Resources */,
+				F9B0F32BF6DA1503A35E9B55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +156,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A14B2BA5D873B95DF4C5D2EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rush01-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9B0F32BF6DA1503A35E9B55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-rush01/Pods-rush01-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftLocation/SwiftLocation.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftLocation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rush01/Pods-rush01-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1DAF2F682171FA1C00FB2AD6 /* Sources */ = {
@@ -272,6 +339,7 @@
 		};
 		1DAF2F7F2171FA1C00FB2AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A68BF348B824BE4DF4B98C31 /* Pods-rush01.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +355,7 @@
 		};
 		1DAF2F802171FA1C00FB2AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 337349064AA913994CEF3F52 /* Pods-rush01.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

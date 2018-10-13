@@ -1,0 +1,20 @@
+PODS:
+  - SwiftLocation (3.2.3):
+    - SwiftyJSON (~> 4.0.0-alpha.1)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - SwiftLocation (~> 3.2.3)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftLocation
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  SwiftLocation: a3c3bc2023118171ef3572188a31def94aa0892c
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 163a1b7840b56330abf116fd78c104a2ed00844e
+
+COCOAPODS: 1.5.3
