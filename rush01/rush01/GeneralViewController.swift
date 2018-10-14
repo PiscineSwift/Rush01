@@ -39,7 +39,6 @@ class GeneralViewController: UIViewController {
     
     fileprivate var trasportType: MKDirectionsTransportType = .automobile
     fileprivate var isBestRoute: Bool = true
-    fileprivate var didDrawRoute: Bool = false
     
     fileprivate var startAnnonation: CustomAnnotation?
     fileprivate var destinationAnnotation: CustomAnnotation?
@@ -93,7 +92,6 @@ class GeneralViewController: UIViewController {
         
         let direcation = MKDirections(request: directionRequest)
         direcation.calculate { [weak self] response, error in
-//            self?.didDrawRoute = true
             guard let `self` = self else { return }
             if let error = error {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
