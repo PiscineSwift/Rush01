@@ -233,10 +233,10 @@ extension GeneralViewController {
     
     @IBAction func segmentedControlAction(sender: UISegmentedControl!) {
         
-        if sender.selectedSegmentIndex == 0{
+        if sender.selectedSegmentIndex == 0 {
             mapView.mapType = MKMapType.standard
         }
-        else if sender.selectedSegmentIndex == 1{
+        else if sender.selectedSegmentIndex == 1 {
             mapView.mapType = MKMapType.hybrid
         }
     }
