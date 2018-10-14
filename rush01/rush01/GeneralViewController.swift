@@ -30,15 +30,20 @@ fileprivate enum Location {
 class GeneralViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var myLocationButton: UIButton!
     @IBOutlet weak var startLocation: UIButton!
     @IBOutlet weak var destinationLocation: UIButton!
+    @IBOutlet weak var getDirection: UIButton!
+    @IBOutlet weak var searchView: UIView!
     
     fileprivate var selfLocation: MKCoordinateRegion?
     fileprivate var locationManager: CLLocationManager!
     fileprivate var locationSelected = Location.start
     
     fileprivate var trasportType: MKDirectionsTransportType = .automobile
-    fileprivate var isBestRoute: Bool = true
+    fileprivate var isBestRoute = true
+    fileprivate var hideSearchView = true
     
     fileprivate var startAnnonation: CustomAnnotation?
     fileprivate var destinationAnnotation: CustomAnnotation?
@@ -51,6 +56,20 @@ class GeneralViewController: UIViewController {
         
         initLocationManager()
         mapView.showsUserLocation = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        searchView.layer.cornerRadius = 10
+        customize(startLocation)
+        customize(destinationLocation)
+        customize(getDirection)
+        customize(myLocationButton)
+    }
+    
+    private func customize(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.height / 2
     }
     
     private func initLocationManager() {
@@ -73,7 +92,7 @@ class GeneralViewController: UIViewController {
             destinationAnnotation = CustomAnnotation(title: title, subtitle: subTitle, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             destinationAnnotation!.color = UIColor.red
             mapView.addAnnotation(destinationAnnotation!)
-        }
+        }   
     }
     
     //this is function for create direction path, from start location to desination location
@@ -83,7 +102,7 @@ class GeneralViewController: UIViewController {
         
         let sourcePlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: startLatitude, longitude: startlLongitude))
         let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinatioLatitude, longitude: destinatioLongitude))
-
+        
         let directionRequest = MKDirectionsRequest()
         directionRequest.source = MKMapItem(placemark: sourcePlacemark)
         directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
@@ -117,8 +136,11 @@ class GeneralViewController: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    
-    
+    func isSearchViewShown() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+             self.searchView.transform = CGAffineTransform.init(translationX: 0, y: self.hideSearchView ? 0 : 300)
+        }) { finish in }
+    }
 }
 
 //MARK: - Location Manager delegates
@@ -153,6 +175,11 @@ extension GeneralViewController: MKMapViewDelegate {
 
 // MARK: Actions
 extension GeneralViewController {
+    @IBAction func searchPressed(_ sender: UIBarButtonItem) {
+        hideSearchView = !hideSearchView
+        isSearchViewShown()
+    }
+    
     @IBAction func myLocationPressed(_ sender: UIButton) {
         guard let region = selfLocation else { return }
         mapView.setRegion(region, animated: true)
@@ -178,6 +205,7 @@ extension GeneralViewController {
     
     @IBAction func showDirection(_ sender: UIButton) {
         mapView.removeOverlays(mapView.overlays)
+        searchView.isHidden = true
         drawPath()
     }
 }
