@@ -247,6 +247,8 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
         
         zoomIn(toLocaction: CLLocation(latitude: latitude, longitude: longitude))
         
+        if mapView.overlays.count != 0 { mapView.removeOverlays(mapView.overlays) }
+        
         if locationSelected == .start {
             if let start = startAnnonation { mapView.removeAnnotation(start) }
             createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: address, latitude: latitude, longitude: longitude)
