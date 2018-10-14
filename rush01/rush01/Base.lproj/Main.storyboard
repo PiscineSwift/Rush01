@@ -54,14 +54,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0v-5u-c44">
+                                <rect key="frame" x="335" y="507" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Me"/>
+                                <connections>
+                                    <action selector="myLocationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOq-p2-Fkt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Rsr-cS-UXc" firstAttribute="leading" secondItem="FcI-PG-JWo" secondAttribute="leading" constant="10" id="3oo-41-VeD"/>
                             <constraint firstItem="FcI-PG-JWo" firstAttribute="bottom" secondItem="Rsr-cS-UXc" secondAttribute="bottom" constant="10" id="IzJ-7b-EWM"/>
+                            <constraint firstItem="FcI-PG-JWo" firstAttribute="trailing" secondItem="V0v-5u-c44" secondAttribute="trailing" constant="10" id="Kl2-i6-5dm"/>
                             <constraint firstItem="FcI-PG-JWo" firstAttribute="trailing" secondItem="Rsr-cS-UXc" secondAttribute="trailing" constant="10" id="c2L-d6-zo9"/>
                             <constraint firstItem="TvZ-3T-aFh" firstAttribute="top" secondItem="9NB-Eu-vDY" secondAttribute="top" id="i9m-kv-ANY"/>
                             <constraint firstAttribute="trailing" secondItem="TvZ-3T-aFh" secondAttribute="trailing" id="j76-0r-v3d"/>
+                            <constraint firstItem="Rsr-cS-UXc" firstAttribute="top" secondItem="V0v-5u-c44" secondAttribute="bottom" constant="10" id="uOc-Rs-Fzv"/>
                             <constraint firstItem="TvZ-3T-aFh" firstAttribute="leading" secondItem="9NB-Eu-vDY" secondAttribute="leading" id="vdJ-oQ-mKa"/>
                             <constraint firstAttribute="bottom" secondItem="TvZ-3T-aFh" secondAttribute="bottom" id="xaa-OA-GdT"/>
                         </constraints>

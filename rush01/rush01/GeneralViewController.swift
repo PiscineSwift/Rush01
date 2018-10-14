@@ -97,6 +97,7 @@ class GeneralViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegion(center: locaction.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
         mapView.setRegion(coordinateRegion, animated: true)
     }
+
     
     
 }
@@ -129,6 +130,11 @@ extension GeneralViewController: MKMapViewDelegate {
 
 // MARK: Actions
 extension GeneralViewController {
+    @IBAction func myLocationPressed(_ sender: UIButton) {
+        guard let region = selfLocation else { return }
+        mapView.setRegion(region, animated: true)
+    }
+    
     @IBAction func openStartLocation(_ sender: UIButton) {
         
         let autoCompleteController = GMSAutocompleteViewController()
@@ -170,7 +176,6 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         let address = place.formattedAddress ?? ""
-        
         let longitude = place.coordinate.longitude
         let latitude = place.coordinate.latitude
         
