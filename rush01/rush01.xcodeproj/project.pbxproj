@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D6A266A21734C1E00800576 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6A266921734C1E00800576 /* CustomAnnotation.swift */; };
 		1DAF2F702171FA1C00FB2AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2F6F2171FA1C00FB2AD6 /* AppDelegate.swift */; };
-		1DAF2F722171FA1C00FB2AD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2F712171FA1C00FB2AD6 /* ViewController.swift */; };
+		1DAF2F722171FA1C00FB2AD6 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2F712171FA1C00FB2AD6 /* GeneralViewController.swift */; };
 		1DAF2F752171FA1C00FB2AD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F732171FA1C00FB2AD6 /* Main.storyboard */; };
 		1DAF2F772171FA1C00FB2AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F762171FA1C00FB2AD6 /* Assets.xcassets */; };
 		1DAF2F7A2171FA1C00FB2AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAF2F782171FA1C00FB2AD6 /* LaunchScreen.storyboard */; };
@@ -29,9 +30,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D6A266921734C1E00800576 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		1DAF2F6C2171FA1C00FB2AD6 /* rush01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rush01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DAF2F6F2171FA1C00FB2AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1DAF2F712171FA1C00FB2AD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1DAF2F712171FA1C00FB2AD6 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		1DAF2F742171FA1C00FB2AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1DAF2F762171FA1C00FB2AD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DAF2F792171FA1C00FB2AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,7 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				1DAF2F6F2171FA1C00FB2AD6 /* AppDelegate.swift */,
-				1DAF2F712171FA1C00FB2AD6 /* ViewController.swift */,
+				1DAF2F712171FA1C00FB2AD6 /* GeneralViewController.swift */,
+				1D6A266921734C1E00800576 /* CustomAnnotation.swift */,
 				1DAF2F732171FA1C00FB2AD6 /* Main.storyboard */,
 				1DAF2F762171FA1C00FB2AD6 /* Assets.xcassets */,
 				1DAF2F782171FA1C00FB2AD6 /* LaunchScreen.storyboard */,
@@ -114,7 +117,6 @@
 				1DAF2F6A2171FA1C00FB2AD6 /* Resources */,
 				1DAF2F842172003B00FB2AD6 /* Embed Frameworks */,
 				228281064E4C5D846CBDF687 /* [CP] Copy Pods Resources */,
-				8B50A1CF36EE0FBF5A9C84F4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -193,26 +195,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rush01/Pods-rush01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B50A1CF36EE0FBF5A9C84F4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-rush01/Pods-rush01-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rush01/Pods-rush01-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A14B2BA5D873B95DF4C5D2EE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,8 +220,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DAF2F722171FA1C00FB2AD6 /* ViewController.swift in Sources */,
+				1DAF2F722171FA1C00FB2AD6 /* GeneralViewController.swift in Sources */,
 				1DAF2F702171FA1C00FB2AD6 /* AppDelegate.swift in Sources */,
+				1D6A266A21734C1E00800576 /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
