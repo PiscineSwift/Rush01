@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-3T-aFh" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-3T-aFh" customClass="MKMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -30,6 +30,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjx-dT-hnT">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Start Location"/>
                                         <connections>
                                             <action selector="openStartLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pOE-ej-MdM"/>
@@ -37,6 +38,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2W-Gg-Ni4">
                                         <rect key="frame" x="0.0" y="40" width="355" height="30"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Destination"/>
                                         <connections>
                                             <action selector="openDestinationLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wxv-gi-3yX"/>
@@ -44,6 +46,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWd-dP-FaA">
                                         <rect key="frame" x="0.0" y="80" width="355" height="30"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Get direcation"/>
                                         <connections>
                                             <action selector="showDirection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7RM-dJ-7vE"/>
@@ -66,7 +69,6 @@
                     </view>
                     <connections>
                         <outlet property="destinationLocation" destination="g2W-Gg-Ni4" id="0An-tW-aXZ"/>
-                        <outlet property="googleMaps" destination="TvZ-3T-aFh" id="ggl-Gn-Hxs"/>
                         <outlet property="startLocation" destination="sjx-dT-hnT" id="5Q7-fl-k26"/>
                     </connections>
                 </viewController>
