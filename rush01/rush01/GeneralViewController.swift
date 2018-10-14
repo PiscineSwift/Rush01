@@ -230,6 +230,16 @@ extension GeneralViewController {
         drawPath()
         isSearchViewShown()
     }
+    
+    @IBAction func segmentedControlAction(sender: UISegmentedControl!) {
+        
+        if sender.selectedSegmentIndex == 0{
+            mapView.mapType = MKMapType.standard
+        }
+        else if sender.selectedSegmentIndex == 1{
+            mapView.mapType = MKMapType.hybrid
+        }
+    }
 }
 
 // MARK: - GMS Auto Complete Delegate, for autocomplete search location

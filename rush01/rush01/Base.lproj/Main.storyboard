@@ -89,12 +89,28 @@
                                             <action selector="myLocationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOq-p2-Fkt"/>
                                         </connections>
                                     </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3ej-m4-ylo">
+                                        <rect key="frame" x="197" y="12" width="120" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="kc2-3r-4OT"/>
+                                            <constraint firstAttribute="height" constant="28" id="rnu-S6-U7H"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Standart"/>
+                                            <segment title="Hybrid"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentedControlActionWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="fdc-cv-TaD"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Rsr-cS-UXc" firstAttribute="top" secondItem="3ej-m4-ylo" secondAttribute="bottom" constant="10" id="2ow-H2-d9O"/>
                                     <constraint firstItem="Rsr-cS-UXc" firstAttribute="leading" secondItem="I68-Q4-2cN" secondAttribute="leading" constant="5" id="3hn-1v-jWL"/>
                                     <constraint firstAttribute="trailing" secondItem="Rsr-cS-UXc" secondAttribute="trailing" constant="5" id="Fc7-k5-pdE"/>
                                     <constraint firstItem="Rsr-cS-UXc" firstAttribute="top" secondItem="V0v-5u-c44" secondAttribute="bottom" constant="10" id="Jpl-SU-Jvw"/>
+                                    <constraint firstItem="V0v-5u-c44" firstAttribute="leading" secondItem="3ej-m4-ylo" secondAttribute="trailing" constant="8" id="LJP-V0-D6w"/>
                                     <constraint firstItem="V0v-5u-c44" firstAttribute="top" secondItem="I68-Q4-2cN" secondAttribute="top" constant="10" id="VOF-6r-JPP"/>
                                     <constraint firstAttribute="trailing" secondItem="V0v-5u-c44" secondAttribute="trailing" constant="10" id="XaW-cH-W6r"/>
                                     <constraint firstAttribute="bottom" secondItem="Rsr-cS-UXc" secondAttribute="bottom" constant="10" id="Xm5-ne-CaV"/>
