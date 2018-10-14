@@ -34,6 +34,8 @@ class GeneralViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager!
     fileprivate var locationSelected = Location.start
     
+    fileprivate var trasportType: MKDirectionsTransportType = .automobile
+    
     fileprivate var startAnnonation: CustomAnnotation?
     fileprivate var destinationAnnotation: CustomAnnotation?
     
@@ -78,7 +80,7 @@ class GeneralViewController: UIViewController {
         let directionRequest = MKDirectionsRequest()
         directionRequest.source = MKMapItem(placemark: sourcePlacemark)
         directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
-        directionRequest.transportType = .automobile
+        directionRequest.transportType = trasportType
         
         let direcation = MKDirections(request: directionRequest)
         direcation.calculate { response, error in
@@ -183,12 +185,12 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
         
         if locationSelected == .start {
             if let start = startAnnonation { mapView.removeAnnotation(start) }
-            locationStart = CLLocation()
+//            locationStart = CLLocation()
             createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: address, latitude: latitude, longitude: longitude)
             locationStart = CLLocation(latitude: latitude, longitude: longitude)
         } else {
             if let destination = destinationAnnotation { mapView.removeAnnotation(destination) }
-            locationDestination = CLLocation()
+//            locationDestination = CLLocation()
             createMarker(forLocation: .destination, titleMarker: "Destination Location", subTitle: address, latitude: latitude, longitude: longitude)
             locationDestination = CLLocation(latitude: latitude, longitude: longitude)
         }
