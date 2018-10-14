@@ -51,6 +51,8 @@ class GeneralViewController: UIViewController {
     fileprivate var locationStart: CLLocation? //CLLocation(latitude: 50.473976, longitude: 30.448605)
     fileprivate var locationDestination: CLLocation? //CLLocation(latitude: 50.440011, longitude: 30.472238)
     
+    fileprivate var userLocation: CLLocationCoordinate2D?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,11 +137,34 @@ class GeneralViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegion(center: locaction.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
         mapView.setRegion(coordinateRegion, animated: true)
     }
-    
+
     func isSearchViewShown() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
              self.searchView.transform = CGAffineTransform.init(translationX: 0, y: self.hideSearchView ? 0 : 300)
         }) { finish in }
+    }
+
+    private func messageBox(messageTitle: String, messageAlert: String, messageBoxStyle: UIAlertControllerStyle, alertActionStyle: UIAlertActionStyle, completionHandler: @escaping () -> Void) {
+        let alert = UIAlertController(title: messageTitle, message: messageAlert, preferredStyle: messageBoxStyle)
+        
+        let myLocation = UIAlertAction(title: "My location", style: alertActionStyle) { _ in
+            guard let latitude = self.userLocation?.latitude, let longitude = self.userLocation?.longitude else { return }
+            self.locationStart = CLLocation(latitude: latitude, longitude: longitude)
+        }
+        
+        let someLocation = UIAlertAction(title: "Choose location", style: alertActionStyle) { _ in
+            let autoCompleteController = GMSAutocompleteViewController()
+            autoCompleteController.delegate = self
+            
+            self.locationSelected = .start
+            UISearchBar.appearance().setTextColor(color: UIColor.black)
+            self.present(autoCompleteController, animated: true, completion: nil)
+        }
+        
+        alert.addAction(myLocation)
+        alert.addAction(someLocation)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -150,6 +175,8 @@ extension GeneralViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        userLocation = locValue
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             selfLocation = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
@@ -186,12 +213,7 @@ extension GeneralViewController {
     }
     
     @IBAction func openStartLocation(_ sender: UIButton) {
-        let autoCompleteController = GMSAutocompleteViewController()
-        autoCompleteController.delegate = self
-        
-        locationSelected = .start
-        UISearchBar.appearance().setTextColor(color: UIColor.black)
-        present(autoCompleteController, animated: true, completion: nil)
+        self.messageBox(messageTitle: "Choose from where to start", messageAlert: "Place", messageBoxStyle: .alert, alertActionStyle: .default) { }
     }
     
     @IBAction func openDestinationLocation(_ sender: UIButton) {
