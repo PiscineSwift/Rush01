@@ -179,7 +179,8 @@ extension GeneralViewController {
     }
     
     @IBAction func showDirection(_ sender: UIButton) {
-        self.drawPath()
+        mapView.removeOverlays(mapView.overlays)
+        drawPath()
     }
 }
 
