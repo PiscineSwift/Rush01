@@ -139,6 +139,7 @@ class GeneralViewController: UIViewController {
     }
 
     func isSearchViewShown() {
+        hideSearchView = !hideSearchView
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
              self.searchView.transform = CGAffineTransform.init(translationX: 0, y: self.hideSearchView ? 0 : 300)
         }) { finish in }
@@ -203,7 +204,6 @@ extension GeneralViewController: MKMapViewDelegate {
 // MARK: Actions
 extension GeneralViewController {
     @IBAction func searchPressed(_ sender: UIBarButtonItem) {
-        hideSearchView = !hideSearchView
         isSearchViewShown()
     }
     
@@ -227,8 +227,8 @@ extension GeneralViewController {
     
     @IBAction func showDirection(_ sender: UIButton) {
         mapView.removeOverlays(mapView.overlays)
-        searchView.isHidden = true
         drawPath()
+        isSearchViewShown()
     }
 }
 

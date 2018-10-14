@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +35,7 @@
                                 <rect key="frame" x="5" y="467" width="365" height="200"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rsr-cS-UXc">
-                                        <rect key="frame" x="5" y="55" width="355" height="140"/>
+                                        <rect key="frame" x="5" y="50" width="355" height="140"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjx-dT-hnT">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
@@ -75,8 +76,11 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0v-5u-c44">
-                                        <rect key="frame" x="330" y="20" width="30" height="30"/>
+                                        <rect key="frame" x="325" y="10" width="30" height="30"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="V0v-5u-c44" secondAttribute="height" multiplier="1:1" id="F9Z-vG-Ty5"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Me">
                                             <color key="titleColor" red="0.0039215686269999999" green="0.72941176470000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -89,10 +93,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Rsr-cS-UXc" firstAttribute="leading" secondItem="I68-Q4-2cN" secondAttribute="leading" constant="5" id="3hn-1v-jWL"/>
-                                    <constraint firstItem="Rsr-cS-UXc" firstAttribute="top" secondItem="V0v-5u-c44" secondAttribute="bottom" constant="5" id="CLd-U5-2C6"/>
                                     <constraint firstAttribute="trailing" secondItem="Rsr-cS-UXc" secondAttribute="trailing" constant="5" id="Fc7-k5-pdE"/>
-                                    <constraint firstAttribute="trailing" secondItem="V0v-5u-c44" secondAttribute="trailing" constant="5" id="XaW-cH-W6r"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rsr-cS-UXc" secondAttribute="bottom" constant="5" id="Xm5-ne-CaV"/>
+                                    <constraint firstItem="Rsr-cS-UXc" firstAttribute="top" secondItem="V0v-5u-c44" secondAttribute="bottom" constant="10" id="Jpl-SU-Jvw"/>
+                                    <constraint firstItem="V0v-5u-c44" firstAttribute="top" secondItem="I68-Q4-2cN" secondAttribute="top" constant="10" id="VOF-6r-JPP"/>
+                                    <constraint firstAttribute="trailing" secondItem="V0v-5u-c44" secondAttribute="trailing" constant="10" id="XaW-cH-W6r"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rsr-cS-UXc" secondAttribute="bottom" constant="10" id="Xm5-ne-CaV"/>
                                     <constraint firstAttribute="height" constant="200" id="tVt-zu-9zs"/>
                                 </constraints>
                             </view>
