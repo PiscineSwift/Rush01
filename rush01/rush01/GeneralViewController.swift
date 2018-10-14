@@ -30,10 +30,12 @@ class GeneralViewController: UIViewController {
     @IBOutlet weak var startLocation: UIButton!
     @IBOutlet weak var destinationLocation: UIButton!
     
-    
     fileprivate var selfLocation: MKCoordinateRegion?
     fileprivate var locationManager: CLLocationManager!
     fileprivate var locationSelected = Location.start
+    
+    fileprivate var startAnnonation: CustomAnnotation?
+    fileprivate var destinationAnnotation: CustomAnnotation?
     
     fileprivate var locationStart = CLLocation()
     fileprivate var locationDestination = CLLocation()
@@ -54,16 +56,22 @@ class GeneralViewController: UIViewController {
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    // MARK: function for create a marker pin on map
-    private func createMarker(titleMarker title: String, subTitle: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        let samplePoint = CustomAnnotation(title: title, subtitle: subTitle, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        samplePoint.color = UIColor.red
-        mapView.addAnnotation(samplePoint)
+    //function for create a marker pin on map
+    private func createMarker(forLocation locaiton: Location, titleMarker title: String, subTitle: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        switch locaiton {
+        case .start:
+            startAnnonation = CustomAnnotation(title: title, subtitle: subTitle, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            startAnnonation!.color = UIColor.blue
+            mapView.addAnnotation(startAnnonation!)
+        case .destination:
+            destinationAnnotation = CustomAnnotation(title: title, subtitle: subTitle, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            destinationAnnotation!.color = UIColor.red
+            mapView.addAnnotation(destinationAnnotation!)
+        }
     }
     
-    //MARK: - this is function for create direction path, from start location to desination location
+    //this is function for create direction path, from start location to desination location
     private func drawPath() {
-
         let sourcePlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationStart.coordinate.latitude, longitude: locationStart.coordinate.longitude))
         let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationDestination.coordinate.latitude, longitude: locationDestination.coordinate.longitude))
         
@@ -107,9 +115,8 @@ extension GeneralViewController: CLLocationManagerDelegate {
     }
 }
 
-
+// MARK: - MapView Delegate
 extension GeneralViewController: MKMapViewDelegate {
- 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let rendered = MKPolylineRenderer(overlay: overlay)
         rendered.strokeColor = UIColor.blue
@@ -162,7 +169,7 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
-        print(place.formattedAddress)
+        let address = place.formattedAddress ?? ""
         
         let longitude = place.coordinate.longitude
         let latitude = place.coordinate.latitude
@@ -170,17 +177,19 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
         zoomIn(toLocaction: CLLocation(latitude: latitude, longitude: longitude))
         
         if locationSelected == .start {
+            if let start = startAnnonation { mapView.removeAnnotation(start) }
             locationStart = CLLocation()
-            createMarker(titleMarker: "Start Location", subTitle: "", latitude: latitude, longitude: longitude)
+            createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: address, latitude: latitude, longitude: longitude)
             locationStart = CLLocation(latitude: latitude, longitude: longitude)
         } else {
+            if let destination = destinationAnnotation { mapView.removeAnnotation(destination) }
             locationDestination = CLLocation()
-            createMarker(titleMarker: "Destination Location", subTitle: "", latitude: latitude, longitude: longitude)
+            createMarker(forLocation: .destination, titleMarker: "Destination Location", subTitle: address, latitude: latitude, longitude: longitude)
             locationDestination = CLLocation(latitude: latitude, longitude: longitude)
         }
         dismiss(animated: true, completion: nil)
     }
-
+    
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
     }
