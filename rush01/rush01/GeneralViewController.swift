@@ -19,6 +19,9 @@ import GoogleMaps
  
  */
 
+//50.473976, 30.448605
+//50.440011, 30.472238
+
 fileprivate enum Location {
     case start
     case destination
@@ -35,12 +38,14 @@ class GeneralViewController: UIViewController {
     fileprivate var locationSelected = Location.start
     
     fileprivate var trasportType: MKDirectionsTransportType = .automobile
+    fileprivate var isBestRoute: Bool = true
+    fileprivate var didDrawRoute: Bool = false
     
     fileprivate var startAnnonation: CustomAnnotation?
     fileprivate var destinationAnnotation: CustomAnnotation?
     
-    fileprivate var locationStart = CLLocation()
-    fileprivate var locationDestination = CLLocation()
+    fileprivate var locationStart: CLLocation! //CLLocation(latitude: 50.473976, longitude: 30.448605)
+    fileprivate var locationDestination: CLLocation! //CLLocation(latitude: 50.440011, longitude: 30.472238)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,20 +82,41 @@ class GeneralViewController: UIViewController {
         let sourcePlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationStart.coordinate.latitude, longitude: locationStart.coordinate.longitude))
         let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationDestination.coordinate.latitude, longitude: locationDestination.coordinate.longitude))
         
+//        createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: "address", latitude: locationStart.coordinate.latitude, longitude: locationStart.coordinate.longitude) // test
+//        createMarker(forLocation: .destination, titleMarker: "Destination Location", subTitle: "address", latitude: locationDestination.coordinate.latitude, longitude: locationDestination.coordinate.longitude) // test
+//
         let directionRequest = MKDirectionsRequest()
         directionRequest.source = MKMapItem(placemark: sourcePlacemark)
         directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
         directionRequest.transportType = trasportType
+        directionRequest.requestsAlternateRoutes = true
         
         let direcation = MKDirections(request: directionRequest)
-        direcation.calculate { response, error in
-            if let error = error { print(error); return }
+        direcation.calculate { [weak self] response, error in
+//            self?.didDrawRoute = true
+            guard let `self` = self else { return }
+            if let error = error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion:nil)
+                return
+            }
             if let response = response {
-                guard let route = response.routes.first else { return }
-                self.mapView.add(route.polyline, level: .aboveRoads)
+                //                guard let route = response.routes.first else { return }
+                print(response.routes.count)
                 
-                let rect = route.polyline.boundingMapRect
-                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+                for route in response.routes {
+                    self.mapView.add(route.polyline, level: .aboveLabels)
+                    let rect = route.polyline.boundingMapRect
+                    self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+                }
+                self.isBestRoute = true
+                
+                
+                //                self.mapView.add(route.polyline, level: .aboveRoads)
+                
+                //                let rect = route.polyline.boundingMapRect
+                //                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
             }
         }
     }
@@ -99,7 +125,7 @@ class GeneralViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegion(center: locaction.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
         mapView.setRegion(coordinateRegion, animated: true)
     }
-
+    
     
     
 }
@@ -122,11 +148,15 @@ extension GeneralViewController: CLLocationManagerDelegate {
 extension GeneralViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let rendered = MKPolylineRenderer(overlay: overlay)
-        rendered.strokeColor = UIColor.blue
-        rendered.lineWidth = 3
+        if isBestRoute {
+            isBestRoute = false
+            rendered.strokeColor = UIColor(red: 17.0/255.0, green: 147.0/255.0, blue: 255.0/255.0, alpha: 1)
+        } else {
+            rendered.strokeColor = UIColor.lightGray.withAlphaComponent(0.7)
+        }
+        rendered.lineWidth = 4
         return rendered
     }
-    
 }
 
 
@@ -165,6 +195,11 @@ extension GeneralViewController {
     
     @IBAction func showDirection(_ sender: UIButton) {
         self.drawPath()
+//        if didDrawRoute {
+//            didDrawRoute = false
+//            let allAnnotations = self.mapView.annotations
+//            self.mapView.removeAnnotations(allAnnotations)
+//        }
     }
 }
 
@@ -185,14 +220,12 @@ extension GeneralViewController: GMSAutocompleteViewControllerDelegate {
         
         if locationSelected == .start {
             if let start = startAnnonation { mapView.removeAnnotation(start) }
-//            locationStart = CLLocation()
             createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: address, latitude: latitude, longitude: longitude)
-            locationStart = CLLocation(latitude: latitude, longitude: longitude)
+            locationStart = CLLocation(latitude: latitude, longitude: longitude) // TODO: remove
         } else {
             if let destination = destinationAnnotation { mapView.removeAnnotation(destination) }
-//            locationDestination = CLLocation()
             createMarker(forLocation: .destination, titleMarker: "Destination Location", subTitle: address, latitude: latitude, longitude: longitude)
-            locationDestination = CLLocation(latitude: latitude, longitude: longitude)
+            locationDestination = CLLocation(latitude: latitude, longitude: longitude)  // TODO: remove
         }
         dismiss(animated: true, completion: nil)
     }
