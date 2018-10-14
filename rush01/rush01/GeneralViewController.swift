@@ -231,6 +231,15 @@ extension GeneralViewController {
         isSearchViewShown()
     }
     
+    @IBAction func directionType(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            trasportType = .automobile
+        } else {
+            trasportType = .walking
+        }
+    }
+    
+    
     @IBAction func segmentedControlAction(sender: UISegmentedControl!) {
         
         if sender.selectedSegmentIndex == 0 {
