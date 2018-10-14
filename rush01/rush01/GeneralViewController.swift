@@ -44,8 +44,8 @@ class GeneralViewController: UIViewController {
     fileprivate var startAnnonation: CustomAnnotation?
     fileprivate var destinationAnnotation: CustomAnnotation?
     
-    fileprivate var locationStart: CLLocation! //CLLocation(latitude: 50.473976, longitude: 30.448605)
-    fileprivate var locationDestination: CLLocation! //CLLocation(latitude: 50.440011, longitude: 30.472238)
+    fileprivate var locationStart: CLLocation? //CLLocation(latitude: 50.473976, longitude: 30.448605)
+    fileprivate var locationDestination: CLLocation? //CLLocation(latitude: 50.440011, longitude: 30.472238)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,12 +79,12 @@ class GeneralViewController: UIViewController {
     
     //this is function for create direction path, from start location to desination location
     private func drawPath() {
-        let sourcePlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationStart.coordinate.latitude, longitude: locationStart.coordinate.longitude))
-        let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: locationDestination.coordinate.latitude, longitude: locationDestination.coordinate.longitude))
+        guard let startLatitude = locationStart?.coordinate.latitude, let startlLongitude = locationStart?.coordinate.longitude else { return }
+        guard let destinatioLatitude = locationDestination?.coordinate.latitude, let destinatioLongitude = locationDestination?.coordinate.longitude else { return }
         
-//        createMarker(forLocation: .start, titleMarker: "Start Location", subTitle: "address", latitude: locationStart.coordinate.latitude, longitude: locationStart.coordinate.longitude) // test
-//        createMarker(forLocation: .destination, titleMarker: "Destination Location", subTitle: "address", latitude: locationDestination.coordinate.latitude, longitude: locationDestination.coordinate.longitude) // test
-//
+        let sourcePlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: startLatitude, longitude: startlLongitude))
+        let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinatioLatitude, longitude: destinatioLongitude))
+
         let directionRequest = MKDirectionsRequest()
         directionRequest.source = MKMapItem(placemark: sourcePlacemark)
         directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
@@ -102,7 +102,6 @@ class GeneralViewController: UIViewController {
                 return
             }
             if let response = response {
-                //                guard let route = response.routes.first else { return }
                 print(response.routes.count)
                 
                 for route in response.routes {
@@ -111,12 +110,6 @@ class GeneralViewController: UIViewController {
                     self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
                 }
                 self.isBestRoute = true
-                
-                
-                //                self.mapView.add(route.polyline, level: .aboveRoads)
-                
-                //                let rect = route.polyline.boundingMapRect
-                //                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
             }
         }
     }
@@ -168,38 +161,25 @@ extension GeneralViewController {
     }
     
     @IBAction func openStartLocation(_ sender: UIButton) {
-        
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         
         locationSelected = .start
-        
         UISearchBar.appearance().setTextColor(color: UIColor.black)
-        self.locationManager.stopUpdatingLocation()
-        
-        self.present(autoCompleteController, animated: true, completion: nil)
+        present(autoCompleteController, animated: true, completion: nil)
     }
     
     @IBAction func openDestinationLocation(_ sender: UIButton) {
-        
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         
         locationSelected = .destination
-        
         UISearchBar.appearance().setTextColor(color: UIColor.black)
-        self.locationManager.stopUpdatingLocation()
-        
-        self.present(autoCompleteController, animated: true, completion: nil)
+        present(autoCompleteController, animated: true, completion: nil)
     }
     
     @IBAction func showDirection(_ sender: UIButton) {
         self.drawPath()
-//        if didDrawRoute {
-//            didDrawRoute = false
-//            let allAnnotations = self.mapView.annotations
-//            self.mapView.removeAnnotations(allAnnotations)
-//        }
     }
 }
 
